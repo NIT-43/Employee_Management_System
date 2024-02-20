@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Employee Management System</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Management System </h1>
+        <div id="output"></div>
+            <button onclick="calculate_Average_Salary()">Average Salary </button>
+            <button onclick="find_Employees_byDepartment('Marketing')">Find Employees in Marketing</button>
+            <button onclick="increaseSalary(10)">increase salaries by 10%</button>
+            <button onclick="Sort_Employees_by_age()">Sort Employees by age</button>
+
+        
+    </div>
+    <script>
+        
+    function Employee(name, age, department, salary) {
+    this.name = name;
+    this.age = age;
+    this.department = department;
+    this.salary = salary;
+}
+let employees = [
+    new Employee("Bishwas", 27, "Marketing", 50000),
+    new Employee("Raghav", 35, "HR", 60000),
+    new Employee("Sita", 28, "IT", 70000),
+    new Employee("Girdhar", 32, "Marketing", 55000)
+];
+function displayOutput(output) {
+    document.getElementById('output').innerHTML = output;
+}
+function calculate_Average_Salary() {
+    let totalSalary = employees.reduce((acc, emp) => acc + emp.salary, 0);
+    let averageSalary = totalSalary / employees.length;
+    displayOutput(`Average Salary: $${averageSalary.toFixed(2)}`);
+}
+
+function find_Employees_byDepartment(department) {
+    let filteredEmployees = employees.filter(emp => emp.department === department);
+    displayOutput(`Employees in ${department}: ${filteredEmployees.map(emp => emp.name).join(', ')}`);
+}
+function increaseSalary(percentage) {
+    employees.forEach(emp => {
+        emp.salary += emp.salary * (percentage / 100);
+    });
+    displayOutput('Salaries increased successfully!');
+}
+function Sort_Employees_by_age() {
+    employees.sort((a, b) => a.age - b.age);
+    displayOutput(`Employees Sorted by Age: ${employees.map(emp => emp.name).join(', ')}`);
+}
+
+
+
+
+</script>
+
+    
+    
+</body>
+</html>
